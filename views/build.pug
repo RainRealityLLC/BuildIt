@@ -1,9 +1,14 @@
 extends ../node_modules/jade-bootstrap/_bootstrap.pug
+
+
 append styles
 	// Custom styles for this template
 	link(href='/css/index.css', rel="stylesheet")
 	link(href='/css/build.css', rel="stylesheet")
 
+	script(src="/js/three.min.js")
+	
+	
 block body
 	+navbar(title,"navbar","inverse")
 		+nav_item("/") Home
@@ -33,8 +38,10 @@ block body
 						span.highlight
 						span.bar
 						label Author
-				
+
 		.col-md-6
-			.build-view-canvas
-				a(href='https://placeholder.com')
-					img(src='http://via.placeholder.com/500x150')
+			#build-view-canvas
+			
+				script(src="/js/modelviewer.js")
+				//- a(href='https://placeholder.com')
+				//- 	img(src='http://via.placeholder.com/500x150')

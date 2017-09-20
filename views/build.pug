@@ -2,10 +2,39 @@ extends ../node_modules/jade-bootstrap/_bootstrap.pug
 append styles
 	// Custom styles for this template
 	link(href='/css/index.css', rel="stylesheet")
+	link(href='/css/build.css', rel="stylesheet")
+
 block body
 	+navbar(title,"navbar","inverse")
 		+nav_item("/") Home
 		+nav_item("/build","active") Build
 		+nav_item("/browse") Browse
 		+nav_item("/about") About
-	h1="Build Your Scene"
+	.row
+		.col-md-6.buildForm
+			h1
+				| Build Project
+			.row
+				.col-md-6
+					button.btn.btn-primary.btn-lg(type='button')
+						| Back
+				.col-md-6
+					button.btn.btn-primary.btn-lg(type='button')
+						| Next
+			.row
+				form
+					.input-group
+						input(type='text', required='')
+						span.highlight
+						span.bar
+						label Name
+					.input-group
+						input(type='text', required='')
+						span.highlight
+						span.bar
+						label Author
+				
+		.col-md-6
+			.build-view-canvas
+				a(href='https://placeholder.com')
+					img(src='http://via.placeholder.com/500x150')

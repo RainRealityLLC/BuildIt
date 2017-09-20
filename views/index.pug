@@ -4,10 +4,10 @@ append styles
 	link(href='/css/index.css', rel="stylesheet")
 block body
 	+navbar(title,"navbar","inverse")
-		+nav_item("#home","active") Home
-		+nav_item("#build") Build
-		+nav_item("#Browse") Browse
-		+nav_item("#about") About
+		+nav_item("/","active") Home
+		+nav_item("/build") Build
+		+nav_item("/browse") Browse
+		+nav_item("/about") About
 	
 	.container
 		h1= title

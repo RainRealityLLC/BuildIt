@@ -1,0 +1,11 @@
+extends ../node_modules/jade-bootstrap/_bootstrap.pug
+append styles
+	// Custom styles for this template
+	link(href='/css/index.css', rel="stylesheet")
+block body
+	+navbar(title,"navbar","inverse")
+		+nav_item("/") Home
+		+nav_item("/build","active") Build
+		+nav_item("/browse") Browse
+		+nav_item("/about") About
+	h1="Build Your Scene"

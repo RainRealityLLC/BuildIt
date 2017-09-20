@@ -1,27 +1,21 @@
-extends ../node_modules/jade-bootstrap/layouts/starter.pug
-
-
-
-append body
+extends ../node_modules/jade-bootstrap/_bootstrap.pug
+append styles
+	// Custom styles for this template
+	link(href='/css/index.css', rel="stylesheet")
+block body
+	+navbar(title,"navbar","inverse")
+		+nav_item("#","active") Home
+		+nav_item("#") About
+		+nav_item("#") Contact
+	
 	.container
 		h1= title
-		p Welcome to #{title}
-		+navbar("Project name","dropdown_menu")
-		+navbar("Project name","dropdown_menu","inverse")
-		+navbar("Project name","dropdown_menu")
-			+nav_item("index.html","active") Home
-			+nav_item("about.html") About
-			+nav_item("contact.html") Contact
-		+navbar("Project name","dropdown_menu")
-			+nav_item("index.html","active") Home
-			+nav_item("about.html") About
-			+nav_item("contact.html") Contact
-			+nav_item_dropdown("#")(label="Dropdown")
-				+nav_item("#") Action
-				+nav_item("#") Another Action
-				+nav_item("#") Something else here
-				+nav_divider
-				+nav_header Nav header
-				+nav_item("#") Separated link
-				+nav_item("#") One more separated link
-	h1 Rajasegar
+		.control-panel
+			.row
+			.col-sm-9#filled
+				| Select Object
+			.row
+			.col-8.col-sm-6
+				| Level 2: .col-8 .col-sm-6
+			.col-4.col-sm-6
+				| Level 2: .col-4 .col-sm-6

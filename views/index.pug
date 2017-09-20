@@ -1,11 +1,11 @@
-extends ../node_modules/jade-bootstrap/layouts/starter
+extends ../node_modules/jade-bootstrap/layouts/starter.pug
+
 
 
 append body
 	.container
 		h1= title
 		p Welcome to #{title}
-		+alert-info("This is a sample info alert.")
 		+navbar("Project name","dropdown_menu")
 		+navbar("Project name","dropdown_menu","inverse")
 		+navbar("Project name","dropdown_menu")

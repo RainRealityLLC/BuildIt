@@ -4,18 +4,35 @@ append styles
 	link(href='/css/index.css', rel="stylesheet")
 block body
 	+navbar(title,"navbar","inverse")
-		+nav_item("#","active") Home
-		+nav_item("#") About
-		+nav_item("#") Contact
+		+nav_item("#home","active") Home
+		+nav_item("#build") Build
+		+nav_item("#Browse") Browse
+		+nav_item("#about") About
 	
 	.container
 		h1= title
 		.control-panel
-			.row
-			.col-sm-9#filled
-				| Select Object
-			.row
-			.col-8.col-sm-6
-				| Level 2: .col-8 .col-sm-6
-			.col-4.col-sm-6
-				| Level 2: .col-4 .col-sm-6
+			.container-fluid
+				.row
+					.col-md-12
+						h3.text-left
+							| Build a New Project
+						button.btn.btn-info(type='button')
+							| Add+
+						h3.text-left
+							| Current Projects
+						.row
+							.col-md-3
+								button.btn.btn-default(type='button')
+									| BEN101
+							.col-md-3
+								button.btn.btn-default(type='button')
+									| BIO121
+							.col-md-3
+								button.btn.btn-default(type='button')
+									| CHM141
+							.col-md-3
+								button.btn.btn-default(type='button')
+									| CMPSC122
+	
+

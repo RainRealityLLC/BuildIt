@@ -1,7 +1,10 @@
 extends ../node_modules/jade-bootstrap/_bootstrap.pug
 append styles
 	// Custom styles for this template
+
 	link(href='/css/index.css', rel="stylesheet")
+
+	link(href='/css/browse.css', rel="stylesheet")
 block body
 	+navbar(title,"navbar","inverse")
 		+nav_item("/") Home
@@ -9,3 +12,103 @@ block body
 		+nav_item("/browse","active") Browse
 		+nav_item("/about") About
 	h1="Browse Models"
+	.container
+	#main_area
+		// Slider
+		.row
+			#slider-thumbs.col-sm-6
+				// Bottom switcher of slider
+				ul.hide-bullets
+					li.col-sm-3
+						a#carousel-selector-0.thumbnail
+							img(src='http://placehold.it/150x150&text=zero')
+					li.col-sm-3
+						a#carousel-selector-1.thumbnail
+							img(src='http://placehold.it/150x150&text=1')
+					li.col-sm-3
+						a#carousel-selector-2.thumbnail
+							img(src='http://placehold.it/150x150&text=2')
+					li.col-sm-3
+						a#carousel-selector-3.thumbnail
+							img(src='http://placehold.it/150x150&text=3')
+					li.col-sm-3
+						a#carousel-selector-4.thumbnail
+							img(src='http://placehold.it/150x150&text=4')
+					li.col-sm-3
+						a#carousel-selector-5.thumbnail
+							img(src='http://placehold.it/150x150&text=5')
+					li.col-sm-3
+						a#carousel-selector-6.thumbnail
+							img(src='http://placehold.it/150x150&text=6')
+					li.col-sm-3
+						a#carousel-selector-7.thumbnail
+							img(src='http://placehold.it/150x150&text=7')
+					li.col-sm-3
+						a#carousel-selector-8.thumbnail
+							img(src='http://placehold.it/150x150&text=8')
+					li.col-sm-3
+						a#carousel-selector-9.thumbnail
+							img(src='http://placehold.it/150x150&text=9')
+					li.col-sm-3
+						a#carousel-selector-10.thumbnail
+							img(src='http://placehold.it/150x150&text=10')
+					li.col-sm-3
+						a#carousel-selector-11.thumbnail
+							img(src='http://placehold.it/150x150&text=11')
+					li.col-sm-3
+						a#carousel-selector-12.thumbnail
+							img(src='http://placehold.it/150x150&text=12')
+					li.col-sm-3
+						a#carousel-selector-13.thumbnail
+							img(src='http://placehold.it/150x150&text=13')
+					li.col-sm-3
+						a#carousel-selector-14.thumbnail
+							img(src='http://placehold.it/150x150&text=14')
+					li.col-sm-3
+						a#carousel-selector-15.thumbnail
+							img(src='http://placehold.it/150x150&text=15')
+			.col-sm-6
+				#slider.col-xs-12
+					// Top part of the slider
+					.row
+						#carousel-bounding-box.col-sm-12
+							#myCarousel.carousel.slide
+								// Carousel items
+								.carousel-inner
+									.active.item(data-slide-number='0')
+										img(src='http://placehold.it/470x480&text=zero')
+									.item(data-slide-number='1')
+										img(src='http://placehold.it/470x480&text=1')
+									.item(data-slide-number='2')
+										img(src='http://placehold.it/470x480&text=2')
+									.item(data-slide-number='3')
+										img(src='http://placehold.it/470x480&text=3')
+									.item(data-slide-number='4')
+										img(src='http://placehold.it/470x480&text=4')
+									.item(data-slide-number='5')
+										img(src='http://placehold.it/470x480&text=5')
+									.item(data-slide-number='6')
+										img(src='http://placehold.it/470x480&text=6')
+									.item(data-slide-number='7')
+										img(src='http://placehold.it/470x480&text=7')
+									.item(data-slide-number='8')
+										img(src='http://placehold.it/470x480&text=8')
+									.item(data-slide-number='9')
+										img(src='http://placehold.it/470x480&text=9')
+									.item(data-slide-number='10')
+										img(src='http://placehold.it/470x480&text=10')
+									.item(data-slide-number='11')
+										img(src='http://placehold.it/470x480&text=11')
+									.item(data-slide-number='12')
+										img(src='http://placehold.it/470x480&text=12')
+									.item(data-slide-number='13')
+										img(src='http://placehold.it/470x480&text=13')
+									.item(data-slide-number='14')
+										img(src='http://placehold.it/470x480&text=14')
+									.item(data-slide-number='15')
+										img(src='http://placehold.it/470x480&text=15')
+								// Carousel nav
+								a.left.carousel-control(href='#myCarousel', role='button', data-slide='prev')
+									span.glyphicon.glyphicon-chevron-left
+								a.right.carousel-control(href='#myCarousel', role='button', data-slide='next')
+									span.glyphicon.glyphicon-chevron-right

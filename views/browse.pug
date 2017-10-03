@@ -11,26 +11,27 @@ block body
 		+nav_item("/build") Build
 		+nav_item("/browse","active") Browse
 		+nav_item("/about") About
-	h1="Browse Models"
+
 	.container
 	#main_area
+		h1="Browse Models"
 		// Slider
 		.row
-			#slider-thumbs.col-sm-6
+			#slider-thumbs.col-sm-4
 				// Bottom switcher of slider
 				ul.hide-bullets
 					li.col-sm-3
 						a#carousel-selector-0.thumbnail
-							img(src='http://placehold.it/150x150&text=zero')
+							img(src='/images/model-previews/audi.jpg')
 					li.col-sm-3
 						a#carousel-selector-1.thumbnail
-							img(src='http://placehold.it/150x150&text=1')
+							img(src='/images/model-previews/audi.jpg')
 					li.col-sm-3
 						a#carousel-selector-2.thumbnail
-							img(src='http://placehold.it/150x150&text=2')
+							img(src='/images/model-previews/audi.jpg')
 					li.col-sm-3
 						a#carousel-selector-3.thumbnail
-							img(src='http://placehold.it/150x150&text=3')
+							img(src='/images/model-previews/audi.jpg')
 					li.col-sm-3
 						a#carousel-selector-4.thumbnail
 							img(src='http://placehold.it/150x150&text=4')
@@ -67,7 +68,13 @@ block body
 					li.col-sm-3
 						a#carousel-selector-15.thumbnail
 							img(src='http://placehold.it/150x150&text=15')
-			.col-sm-6
+						.col-sm-4
+							.space
+
+			.col-sm-3
+				.space
+
+			.col-sm-3
 				#slider.col-xs-12
 					// Top part of the slider
 					.row
@@ -76,13 +83,13 @@ block body
 								// Carousel items
 								.carousel-inner
 									.active.item(data-slide-number='0')
-										img(src='http://placehold.it/470x480&text=zero')
+										img(src='/images/model-previews/audi.jpg')
 									.item(data-slide-number='1')
-										img(src='http://placehold.it/470x480&text=1')
+										img(src='/images/model-previews/audi.jpg')
 									.item(data-slide-number='2')
-										img(src='http://placehold.it/470x480&text=2')
+										img(src='/images/model-previews/audi.jpg')
 									.item(data-slide-number='3')
-										img(src='http://placehold.it/470x480&text=3')
+										img(src='/images/model-previews/audi.jpg')
 									.item(data-slide-number='4')
 										img(src='http://placehold.it/470x480&text=4')
 									.item(data-slide-number='5')
@@ -90,7 +97,7 @@ block body
 									.item(data-slide-number='6')
 										img(src='http://placehold.it/470x480&text=6')
 									.item(data-slide-number='7')
-										img(src='http://placehold.it/470x480&text=7')
+										img(src='/images/model-previews/audi.jpg')
 									.item(data-slide-number='8')
 										img(src='http://placehold.it/470x480&text=8')
 									.item(data-slide-number='9')
@@ -112,3 +119,7 @@ block body
 									span.glyphicon.glyphicon-chevron-left
 								a.right.carousel-control(href='#myCarousel', role='button', data-slide='next')
 									span.glyphicon.glyphicon-chevron-right
+
+	script(src='/js/jquery.min.js')
+	script(src='/js/bootstrap.min.js')
+	script(src='/js/browse-carousel.js')

@@ -1,0 +1,228 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title Rain Reality BuildIt WebTool
+  body
+    canvas
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.min.js')
+    script(src='/js/OrbitControls.js')
+    // FOR TRANSFORM CONTROLS LIKE UNITY <script src = "https://raw.githubusercontent.com/lucascassiano/three-transform-controls/master/index.js"></script>
+    script.
+      var webTool = {
+        // variables
+        camera: false,
+        controls: false,
+        scene: false,
+        renderer: false,
+        container: false,
+        textlabels: [],
+        onReady: function() {
+        this.scene = new THREE.Scene();
+        this.scene.background = new THREE.Color(0xadd8e6);
+        this.renderer = new THREE.WebGLRenderer();
+        this.renderer.setClearColor(0xEEEEEE);
+        this.renderer.setPixelRatio(window.devicePixelRatio);
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        var elObject = new THREE.SphereGeometry( 1 );
+        var objectMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, wireframe: true } );
+        var mesh = new THREE.Mesh(elObject, objectMaterial)
+        this.scene.add(mesh);
+        this.container.appendChild(this.renderer.domElement);
+        this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 10000);
+        this.camera.position.z = 500;
+        this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+        this.controls.enableDamping = true;
+        this.controls.dampingFactor =  0.25;
+        this.controls.enableZoom = true;
+        this.controls.enablePan = false;
+        this.controls.enableKeys = false;
+        var geometry = new THREE.CylinderGeometry(0, 0, 0, 0, 0);
+      },
+
+      function addText() {
+      var material = new THREE.MeshBasicMaterial({
+      color: #00FFFFFF
+      });
+      var mesh2 = new THREE.Mesh(geometry, material);
+      mesh2.position.x = (Math.random() - 0.5) * 1000;
+      mesh2.position.y = (Math.random() - 0.5) * 1000;
+      mesh2.position.z = (Math.random() - 0.5) * 1000;
+      mesh2.updateMatrix();
+      mesh2.matrixAutoUpdate = false;
+      this.scene.add(mesh2);
+      var text = this._createTextLabel();
+      var textValue = prompt("What text would you like to include?")
+      text.setHTML(textValue);
+      text.setParent(mesh2);
+      this.textlabels.push(text);
+      this.container.appendChild(text.element);
+      //
+      // animate
+      //
+      var _this = this;
+      var animate = function() {
+      requestAnimationFrame(animate);
+      _this.controls.update();
+      _this._render();
+      }
+      animate();
+      }
+      onResize: function() {
+      this.camera.aspect = window.innerWidth / window.innerHeight;
+      this.camera.updateProjectionMatrix();
+      this.renderer.setSize(window.innerWidth, window.innerHeight);
+      },
+      _render: function() {
+      for(var i=0; i<this.textlabels.length; i++) {
+      this.textlabels[i].updatePosition();
+      }
+      this.renderer.render(this.scene, this.camera);
+      },
+      _createTextLabel: function() {
+      var div = document.createElement('div');
+      div.className = 'text-label';
+      div.style.position = 'absolute';
+      div.style.width = 100;
+      div.style.height = 100;
+      div.innerHTML = "hi there!";
+      div.style.top = -1000;
+      div.style.left = -1000;
+      var _this = this;
+      return {
+      element: div,
+      parent: false,
+      position: new THREE.Vector3(0,0,0),
+      setHTML: function(html) {
+      this.element.innerHTML = html;
+      },
+      setParent: function(threejsobj) {
+      this.parent = threejsobj;
+      },
+      updatePosition: function() {
+      if(parent) {
+      this.position.copy(this.parent.position);
+      }
+      var coords2d = this.get2DCoords(this.position, _this.camera);
+      this.element.style.left = coords2d.x + 'px';
+      this.element.style.top = coords2d.y + 'px';
+      },
+      get2DCoords: function(position, camera) {
+      var vector = position.project(camera);
+      vector.x = (vector.x + 1)/2 * window.innerWidth;
+      vector.y = -(vector.y - 1)/2 * window.innerHeight;
+      return vector;
+      }
+      };
+      }
+      };
+      webTool.container = document.getElementById('container');
+      webTool.onReady();
+      window.addEventListener('resize', function() {
+      webTool.onResize();
+      }, false);
+      /*function addText() {
+      var loader = new THREE.FontLoader();
+      loader.load(
+      'fonts/helvetiker_regular.typeface.json', function(font) {
+      var textStuff = new THREE.TextGeometry("Enter Text in OpenControls", {
+      font: font,
+      size: 30,
+      height: 5,
+      curveSegments: 12,
+      bevelEnabled: true,
+      bevelThickness: 5,
+      bevelSize: 5,
+      bevelSegments: 5
+      } );
+      } );
+      scene.add (textStuff);
+      }
+      */
+      /*function animate( time ) {
+      renderer.render( scene, camera );
+      requestAnimationFrame( animate );
+      controls.update();
+      render();
+      if ( currentLabel )
+      {
+      currentLabel.lookAt( camera.position );
+      }
+      }
+      function render() {
+      renderer.render(scene, camera);
+      }
+      init();
+      animate();*/
+      //ROTATES THE OBJECT
+      var rotObjectMatrix;
+      var xAxis = new THREE.Vector3(1,0,0);
+      var yAxis = new THREE.Vector3(0,1,0);
+      function rotateAroundObjectAxis(object, axis, radians) {
+      rotObjectMatrix = new THREE.Matrix4();
+      rotObjectMatrix.makeRotationAxis(axis.normalize(), radians);
+      object.matrix.multiply(rotObjectMatrix);
+      object.rotation.setFromRotationMatrix(object.matrix);
+      }
+      function rotateCC() {
+      rotateAroundObjectAxis(mesh, yAxis, Math.PI / 60);
+      }
+      function rotateC() {
+      rotateAroundObjectAxis(mesh, yAxis, -Math.PI / 60);
+      }
+      //CHANGES THE POSITION OF THE OBJECT (Y-AXIS)
+      function move(object, distance) {
+      object.position.y += distance;
+      }
+      function moveUp() {
+      move(mesh, 0.1);
+      }
+      function moveDown(){
+      move(mesh, -0.1);
+      }
+    script.
+      function moveLR(object, distance) {
+      object.position.x += distance;
+      }
+      function moveRight() {
+      moveLR(mesh, 0.1);
+      pressTime();
+      }
+      function moveLeft() {
+      moveLR(mesh, -0.1);
+      }
+      function scale(object, multiplier) {
+      object.scale.x += multiplier;
+      object.scale.y += multiplier;
+      object.scale.z += multiplier;
+      }
+      function scaleBig() {
+      scale(mesh, 0.1);
+      }
+      function scaleSmall() {
+      scale(mesh, -0.1);
+      }
+      /*function addText() {
+      var text2 = document.createElement('div');
+      text2.style.position = 'absolute';
+      text2.style.zIndex = 1;    // if you still don't see the label, try uncommenting this
+      text2.style.width = 100;
+      text2.style.height = 100;
+      text2.style.backgroundColor = "blue";
+      text2.innerHTML = "hi there!";
+      text2.style.top = 200 + 'px';
+      text2.style.left = 200 + 'px';
+      document.body.appendChild(text2);
+      }*/
+    #container
+    button#btn(onclick='rotateCC()') Rotate Counter Clockwise
+    button(onclick='rotateC()') Rotate Clockwise
+    button(onclick='moveUp()') Move Up
+    button(onclick='moveDown()') Move Down
+    button(onclick='moveRight()') Move Right
+    button(onclick='moveLeft()') Move Left
+    button(onclick='scaleBig()') Scale Bigger
+    button(onclick='scaleSmall()') Scale Smaller
+    button(onclick='addText()') Add Text
+    // <p id = "userText"></p>
+    // try something with transform controls for this ^ (reference bookmark)

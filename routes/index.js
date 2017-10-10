@@ -21,3 +21,14 @@ router.get('/browse', function(req, res, next) {
   res.render('browse', { title: 'BuildIt: 3d Scene Designer'})
 });
 module.exports = router;
+
+/* GET home page. */
+router.get('/judy', function(req, res, next) {
+  res.render('judy', { title: 'BuildIt: 3d Scene Designer'})
+});
+
+/* GET home page. */
+router.get('/kayli', function(req, res, next) {
+  res.render('kayli', { title: 'BuildIt: 3d Scene Designer'})
+});
+module.exports = router;

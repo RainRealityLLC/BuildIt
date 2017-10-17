@@ -1,4 +1,4 @@
-console.log("We entered!");
+
 // var loader = new THREE.JSONLoader();
 // loader.load( '../models/tonemapping/tonemapping-replication.json', function ( geometry ) {
 // var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial() );
@@ -13,7 +13,7 @@ console.log("We entered!");
 var container, stats;
 var camera, scene, renderer;
 var mouseX = 0, mouseY = 0;
-
+console.log("We entered!");
 var centerX = 0, centerY = 0;
 var width = 0 , height = 0;
 var directionalLight;

@@ -1,4 +1,3 @@
-doctype html
 html
   head
     meta(charset='utf-8')
@@ -6,126 +5,25 @@ html
   body
     canvas
     script(src='http://cdnjs.cloudflare.com/ajax/libs/three.js/84/three.min.js')
-    script(src='/js/OrbitControls.js')
-    // FOR TRANSFORM CONTROLS LIKE UNITY <script src = "https://raw.githubusercontent.com/lucascassiano/three-transform-controls/master/index.js"></script>
     script.
-      // variables
-      var camera, controls, scene, renderer, container, mesh;
-      var textlabels = [];
+      var camera, scene, renderer, controls;
+      var geometry, material, mesh;
       function init() {
+      camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+      camera.position.z = 3;
       scene = new THREE.Scene();
-      scene.background = new THREE.Color(0xadd8e6);
-      renderer = new THREE.WebGLRenderer();
-      renderer.setClearColor(0xEEEEEE);
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      if (container != null) {
-      container.appendChild(renderer.domElement);
+      scene.background = new THREE.Color( 0xadd8e6 );
+      //controls = new THREE.OrbitControls(camera, renderer.domElement);
+      //controls.addEventListener('change', render);
+      geometry = new THREE.SphereGeometry( 1 );
+      material = new THREE.MeshBasicMaterial( { color: 0x000000, wireframe: true } );
+      geometry.name = "Sphere";
+      mesh = new THREE.Mesh( geometry, material );
+      scene.add( mesh );
+      renderer = new THREE.WebGLRenderer( { antialias: true } );
+      renderer.setSize( window.innerWidth/2, window.innerHeight/2 );
+      document.body.appendChild( renderer.domElement );
       }
-      var elObject = new THREE.SphereGeometry( 1 );
-      var objectMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, wireframe: true } );
-      mesh = new THREE.Mesh(elObject, objectMaterial)
-      scene.add(mesh);
-      camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 10000);
-      camera.position.z = 500;
-      controls = new THREE.OrbitControls(camera, renderer.domElement);
-      controls.enableDamping = true;
-      controls.dampingFactor =  0.25;
-      controls.enableZoom = true;
-      controls.enablePan = false;
-      controls.enableKeys = false;
-      }
-      function addText() {
-      var material = new THREE.MeshBasicMaterial({
-      color: 0x00000000
-      });
-      var geometry = new THREE.CylinderGeometry(0, 0, 0, 0, 0);
-      var mesh2 = new THREE.Mesh(geometry, material);
-      mesh2.position.x = (Math.random() - 0.5) * 1000;
-      mesh2.position.y = (Math.random() - 0.5) * 1000;
-      mesh2.position.z = (Math.random() - 0.5) * 1000;
-      mesh2.updateMatrix();
-      mesh2.matrixAutoUpdate = false;
-      scene.add(mesh2);
-      var text = _createTextLabel();
-      var textValue = prompt("What text would you like to include?")
-      text.setHTML(textValue);
-      text.setParent(mesh2);
-      textlabels.push(text);
-      if (container != null) {
-      container.appendChild(text.element);
-      }
-      //
-      // animate
-      //
-      var _animate = function() {
-      requestAnimationFrame(animate);
-      controls.update();
-      _render();
-      }
-      _animate();
-      }
-      function onResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      }
-      function _render() {
-      for(var i=0; i<textlabels.length; i++) {
-      textlabels[i].updatePosition();
-      }
-      renderer.render(scene, camera);
-      }
-      function _createTextLabel() {
-      var div = document.createElement('div');
-      div.className = 'text-label';
-      div.style.position = 'absolute';
-      div.style.width = 100;
-      div.style.height = 100;
-      div.innerHTML = "hi there!";
-      div.style.top = -1000;
-      div.style.left = -1000;
-      var _this = this;
-      return {
-      element: div,
-      parent: false,
-      position: new THREE.Vector3(0,0,0),
-      setHTML: function(html) {
-      this.element.innerHTML = html;
-      },
-      setParent: function(threejsobj) {
-      this.parent = threejsobj;
-      },
-      updatePosition: function() {
-      if(parent) {
-      this.position.copy(this.parent.position);
-      }
-      var coords2d = this.get2DCoords(this.position, _this.camera);
-      this.element.style.left = coords2d.x + 'px';
-      this.element.style.top = coords2d.y + 'px';
-      },
-      get2DCoords: function(position, camera) {
-      var vector = position.project(camera);
-      vector.x = (vector.x + 1)/2 * window.innerWidth;
-      vector.y = -(vector.y - 1)/2 * window.innerHeight;
-      return vector;
-      }
-      }
-      }
-      container = document.getElementById('container');
-      init();
-      window.addEventListener('resize', function() {
-      onResize();
-      }, false);
-      function animate() {
-      requestAnimationFrame(animate);
-      controls.update();
-      render();
-      }
-      function render() {
-      renderer.render(scene, camera);
-      }
-      animate();
       /*function addText() {
       var loader = new THREE.FontLoader();
       loader.load(
@@ -144,21 +42,20 @@ html
       scene.add (textStuff);
       }
       */
-      /*function animate( time ) {
-      renderer.render( scene, camera );
+      function animate( time ) {
       requestAnimationFrame( animate );
-      controls.update();
       render();
-      if ( currentLabel )
+      /*if ( currentLabel )
       {
       currentLabel.lookAt( camera.position );
-      }
+      }*/
       }
       function render() {
       renderer.render(scene, camera);
       }
       init();
-      animate();*/
+      requestAnimationFrame( animate );
+    script.
       //ROTATES THE OBJECT
       var rotObjectMatrix;
       var xAxis = new THREE.Vector3(1,0,0);
@@ -175,6 +72,7 @@ html
       function rotateC() {
       rotateAroundObjectAxis(mesh, yAxis, -Math.PI / 60);
       }
+    script.
       //CHANGES THE POSITION OF THE OBJECT (Y-AXIS)
       function move(object, distance) {
       object.position.y += distance;
@@ -186,17 +84,17 @@ html
       move(mesh, -0.1);
       }
     script.
-      //CHANGES THE POSITION OF THE OBJECT (X-AXIS)
       function moveLR(object, distance) {
       object.position.x += distance;
       }
       function moveRight() {
       moveLR(mesh, 0.1);
+      pressTime();
       }
       function moveLeft() {
       moveLR(mesh, -0.1);
       }
-      //SCALES THE OBJECT
+    script.
       function scale(object, multiplier) {
       object.scale.x += multiplier;
       object.scale.y += multiplier;
@@ -208,19 +106,23 @@ html
       function scaleSmall() {
       scale(mesh, -0.1);
       }
-      /*function addText() {
-      var text2 = document.createElement('div');
-      text2.style.position = 'absolute';
-      text2.style.zIndex = 1;    // if you still don't see the label, try uncommenting this
-      text2.style.width = 100;
-      text2.style.height = 100;
-      text2.style.backgroundColor = "blue";
-      text2.innerHTML = "hi there!";
-      text2.style.top = 200 + 'px';
-      text2.style.left = 200 + 'px';
-      document.body.appendChild(text2);
-      }*/
-    #container
+    script.
+      function addText() {
+      var loader = new THREE.FontLoader();
+      loader.load(
+      'fonts/helvetiker_regular.typeface.json', function(font) {
+      var geometry = new THREE.TextGeometry("Enter Text in OpenControls", {
+      font: font,
+      size: 30,
+      height: 5,
+      curveSegments: 12,
+      bevelEnabled: true,
+      bevelThickness: 5,
+      bevelSize: 5,
+      bevelSegments: 5
+      } );
+      } );
+      }
     button#btn(onclick='rotateCC()') Rotate Counter Clockwise
     button(onclick='rotateC()') Rotate Clockwise
     button(onclick='moveUp()') Move Up
@@ -230,5 +132,5 @@ html
     button(onclick='scaleBig()') Scale Bigger
     button(onclick='scaleSmall()') Scale Smaller
     button(onclick='addText()') Add Text
-    // <p id = "userText"></p>
-    // try something with transform controls for this ^ (reference bookmark)
+    p#userText
+    |       //try something with transform controls for this ^ (reference bookmark)

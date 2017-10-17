@@ -1,0 +1,33 @@
+.body-content{
+    padding: 0px 100px 0px 100px;
+}
+
+#logo{
+  text-align: center;
+}
+#about-title{
+  text-align: center;
+}
+hr.fringe {
+  height: 30px;
+  border-style: solid;
+  border-color: #8c8b8b;
+  border-width: 1px 0 0 0;
+  border-radius: 20px;
+}
+hr.fringe:before {
+  display: block;
+  content: "";
+  height: 30px;
+  margin-top: -31px;
+  border-style: solid;
+  border-color: #8c8b8b;
+  border-width: 0 0 1px 0;
+  border-radius: 20px;
+}
+
+.inline-image-centered{
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}

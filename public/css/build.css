@@ -1,13 +1,10 @@
 .buildForm{
-
 	margin: 0px 0px  0px 30px;
-
 }
 
 .form{
 	padding: 40px;
 }
-
 
 #build-view-canvas{
 	background-color: #000;
@@ -15,6 +12,4 @@
 	height: 500px;
 	margin: 15px;
 	padding: 0px;
-
-
 }

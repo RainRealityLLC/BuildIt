@@ -5,81 +5,78 @@ html
     title Rain Reality BuildIt WebTool
   body
     canvas
-    script(src='http://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.min.js')
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/three.js/84/three.min.js')
     script(src='/js/OrbitControls.js')
     // FOR TRANSFORM CONTROLS LIKE UNITY <script src = "https://raw.githubusercontent.com/lucascassiano/three-transform-controls/master/index.js"></script>
     script.
-      var webTool = {
-        // variables
-        camera: false,
-        controls: false,
-        scene: false,
-        renderer: false,
-        container: false,
-        textlabels: [],
-        onReady: function() {
-        this.scene = new THREE.Scene();
-        this.scene.background = new THREE.Color(0xadd8e6);
-        this.renderer = new THREE.WebGLRenderer();
-        this.renderer.setClearColor(0xEEEEEE);
-        this.renderer.setPixelRatio(window.devicePixelRatio);
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        var elObject = new THREE.SphereGeometry( 1 );
-        var objectMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, wireframe: true } );
-        var mesh = new THREE.Mesh(elObject, objectMaterial)
-        this.scene.add(mesh);
-        this.container.appendChild(this.renderer.domElement);
-        this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 10000);
-        this.camera.position.z = 500;
-        this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
-        this.controls.enableDamping = true;
-        this.controls.dampingFactor =  0.25;
-        this.controls.enableZoom = true;
-        this.controls.enablePan = false;
-        this.controls.enableKeys = false;
-        var geometry = new THREE.CylinderGeometry(0, 0, 0, 0, 0);
-      },
-
+      // variables
+      var camera, controls, scene, renderer, container, mesh;
+      var textlabels = [];
+      function init() {
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0xadd8e6);
+      renderer = new THREE.WebGLRenderer();
+      renderer.setClearColor(0xEEEEEE);
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      if (container != null) {
+      container.appendChild(renderer.domElement);
+      }
+      var elObject = new THREE.SphereGeometry( 1 );
+      var objectMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, wireframe: true } );
+      mesh = new THREE.Mesh(elObject, objectMaterial)
+      scene.add(mesh);
+      camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 10000);
+      camera.position.z = 500;
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor =  0.25;
+      controls.enableZoom = true;
+      controls.enablePan = false;
+      controls.enableKeys = false;
+      }
       function addText() {
       var material = new THREE.MeshBasicMaterial({
-      color: #00FFFFFF
+      color: 0x00000000
       });
+      var geometry = new THREE.CylinderGeometry(0, 0, 0, 0, 0);
       var mesh2 = new THREE.Mesh(geometry, material);
       mesh2.position.x = (Math.random() - 0.5) * 1000;
       mesh2.position.y = (Math.random() - 0.5) * 1000;
       mesh2.position.z = (Math.random() - 0.5) * 1000;
       mesh2.updateMatrix();
       mesh2.matrixAutoUpdate = false;
-      this.scene.add(mesh2);
-      var text = this._createTextLabel();
+      scene.add(mesh2);
+      var text = _createTextLabel();
       var textValue = prompt("What text would you like to include?")
       text.setHTML(textValue);
       text.setParent(mesh2);
-      this.textlabels.push(text);
-      this.container.appendChild(text.element);
+      textlabels.push(text);
+      if (container != null) {
+      container.appendChild(text.element);
+      }
       //
       // animate
       //
-      var _this = this;
-      var animate = function() {
+      var _animate = function() {
       requestAnimationFrame(animate);
-      _this.controls.update();
-      _this._render();
+      controls.update();
+      _render();
       }
-      animate();
+      _animate();
       }
-      onResize: function() {
-      this.camera.aspect = window.innerWidth / window.innerHeight;
-      this.camera.updateProjectionMatrix();
-      this.renderer.setSize(window.innerWidth, window.innerHeight);
-      },
-      _render: function() {
-      for(var i=0; i<this.textlabels.length; i++) {
-      this.textlabels[i].updatePosition();
+      function onResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
       }
-      this.renderer.render(this.scene, this.camera);
-      },
-      _createTextLabel: function() {
+      function _render() {
+      for(var i=0; i<textlabels.length; i++) {
+      textlabels[i].updatePosition();
+      }
+      renderer.render(scene, camera);
+      }
+      function _createTextLabel() {
       var div = document.createElement('div');
       div.className = 'text-label';
       div.style.position = 'absolute';
@@ -113,14 +110,22 @@ html
       vector.y = -(vector.y - 1)/2 * window.innerHeight;
       return vector;
       }
-      };
       }
-      };
-      webTool.container = document.getElementById('container');
-      webTool.onReady();
+      }
+      container = document.getElementById('container');
+      init();
       window.addEventListener('resize', function() {
-      webTool.onResize();
+      onResize();
       }, false);
+      function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      render();
+      }
+      function render() {
+      renderer.render(scene, camera);
+      }
+      animate();
       /*function addText() {
       var loader = new THREE.FontLoader();
       loader.load(
@@ -181,16 +186,17 @@ html
       move(mesh, -0.1);
       }
     script.
+      //CHANGES THE POSITION OF THE OBJECT (X-AXIS)
       function moveLR(object, distance) {
       object.position.x += distance;
       }
       function moveRight() {
       moveLR(mesh, 0.1);
-      pressTime();
       }
       function moveLeft() {
       moveLR(mesh, -0.1);
       }
+      //SCALES THE OBJECT
       function scale(object, multiplier) {
       object.scale.x += multiplier;
       object.scale.y += multiplier;

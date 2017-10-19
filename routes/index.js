@@ -6,28 +6,28 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'BuildIt: 3d Scene Designer'})
 });
 
-/* GET home page. */
+/* GET about page. */
 router.get('/about', function(req, res, next) {
   res.render('about', { title: 'BuildIt: 3d Scene Designer'})
 });
 
-/* GET home page. */
+/* GET build page. */
 router.get('/build', function(req, res, next) {
   res.render('build', { title: 'BuildIt: 3d Scene Designer'})
 });
 
-/* GET home page. */
+/* GET browse page. */
 router.get('/browse', function(req, res, next) {
   res.render('browse', { title: 'BuildIt: 3d Scene Designer'})
 });
 module.exports = router;
 
-/* GET home page. */
+/* GET judy page. */
 router.get('/judy', function(req, res, next) {
   res.render('judy', { title: 'BuildIt: 3d Scene Designer'})
 });
 
-/* GET home page. */
+/* GET kayli page. */
 router.get('/kayli', function(req, res, next) {
   res.render('kayli', { title: 'BuildIt: 3d Scene Designer'})
 });

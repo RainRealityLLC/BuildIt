@@ -1,20 +1,17 @@
-.buildForm{
 
-	margin: 0px 0px  0px 30px;
+form{
+	padding-top: 30px;
+	padding-left: 40px;
 
 }
+.build-form{
+	padding-left: 30px;
 
-.form{
-	padding: 40px;
 }
-
 
 #build-view-canvas{
 	background-color: #000;
-	width: 500px;
-	height: 500px;
+	height: 300px;
 	margin: 15px;
-	padding: 0px;
-
-
+	text-align: center;
 }

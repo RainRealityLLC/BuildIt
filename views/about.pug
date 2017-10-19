@@ -1,12 +1,26 @@
 extends ../node_modules/jade-bootstrap/_bootstrap.pug
 append styles
-	// Custom styles for this template
-	link(href='/css/index.css', rel="stylesheet")
+    // Custom styles for this template
+    link(href='/css/index.css', rel="stylesheet")
+    link(href='/css/about.css', rel="stylesheet")
+
 block body
-	+navbar(title,"navbar","inverse")
-		+nav_item("/") Home
-		+nav_item("/build") Build
-		+nav_item("/browse") Browse
-		+nav_item("/about","active") About
-	h1="About Rain Reality"
-	p= "Lorem ipsum dolor sit amet, sanctus adolescens vix eu, sed ut modus ancillae. Ex cum nobis graeco molestie, persecuti persequeris efficiantur in sea. Qui in probo lobortis, modo facilisis vel ut, eu mea libris feugiat antiopam. Ut nec omnis accusam noluisse, molestie perpetua appellantur has et, ei nec legere aperiam. Qui facete salutatus eloquentiam in. Nec an consul recteque reprehendunt."
+    +navbar(title,"navbar","inverse")
+        +nav_item("/") Home
+        +nav_item("/build") Build
+        +nav_item("/browse") Browse
+        +nav_item("/about","active") About
+    .body-content
+      #logo
+        +img-circle("http://via.placeholder.com/250x250","logo")
+      #about-title
+        h1="About Rain Reality"
+      hr.fringe
+
+      #about-content
+        p= "Lorem ipsum dolor sit amet, sanctus adolescens vix eu, sed ut modus ancillae. Ex cum nobis graeco molestie, persecuti persequeris efficiantur in sea. Qui in probo lobortis, modo facilisis vel ut, eu mea libris feugiat antiopam. Ut nec omnis accusam noluisse, molestie perpetua appellantur has et, ei nec legere aperiam. Qui facete salutatus eloquentiam in. Nec an consul recteque reprehendunt.Lorem ipsum dolor sit amet, sanctus adolescens vix eu, sed ut modus ancillae. Ex cum nobis graeco molestie, persecuti persequeris efficiantur in sea. Qui in probo lobortis, modo facilisis vel ut, eu mea libris feugiat antiopam. Ut nec omnis accusam noluisse, molestie perpetua appellantur has et, ei nec legere aperiam. Qui facete salutatus eloquentiam in. Nec an consul recteque reprehendunt.Lorem ipsum dolor sit amet, sanctus adolescens vix eu, sed ut modus ancillae. Ex cum nobis graeco molestie, persecuti persequeris efficiantur in sea. Qui in probo lobortis, modo facilisis vel ut, eu mea libris feugiat antiopam."
+
+        .inline-image-centered
+          +img-responsive-center("http://via.placeholder.com/600x200","image")
+
+        p=" appellantur has et, ei nec legere aperiam. Qui facete salutatus eloquentiam in. Nec an consul recteque reprehendunt.Lorem ipsum dolor sit amet, sanctus adolescens vix eu, sed ut modus ancillae. Ex cum nobis graeco molestie, persecuti persequeris efficiantur in sea. Qui in probo lobortis, modo facilisis vel ut, eu mea libris feugiat antiopam. Ut nec omnis accusam noluisse, molestie perpetua appellantur has et, ei nec legere aperiam. Qui facete salutatus eloquentiam in. Nec an consul recteque reprehendunt.Lorem ipsum dolor sit amet."

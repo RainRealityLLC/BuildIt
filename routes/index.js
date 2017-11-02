@@ -31,4 +31,9 @@ router.get('/judy', function(req, res, next) {
 router.get('/kayli', function(req, res, next) {
   res.render('kayli', { title: 'BuildIt: 3d Scene Designer'})
 });
+
+/* GET Editor page. */
+router.get('/editor', function(req, res, next) {
+  res.render('editor', { title: 'BuildIt: 3d Scene Designer'})
+});
 module.exports = router;

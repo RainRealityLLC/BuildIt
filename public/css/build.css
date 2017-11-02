@@ -9,9 +9,13 @@ form{
 
 }
 
-#build-view-canvas{
-	background-color: #000;
-	height: 300px;
-	margin: 15px;
+
+#info {
 	text-align: center;
+}
+#text-overlay{
+color: #000000;
+}
+#threejsscene {
+padding-top: 100px;
 }

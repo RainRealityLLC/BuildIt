@@ -24,3 +24,8 @@ Enter this into  your web browser to see the running website.
 * [NodeJS](http://nodejs.org/) 
 * [Express](http://expressjs.com) 
 
+    **Converters**
+
+    Fbx files aren't well documented in three.js -- however, many of our models are in this format. Here are some tools to help convert them into friendlier models.
+
+    [Assimp](https://github.com/assimp/assimp) - Assimp is a library to import/export 3d model formats

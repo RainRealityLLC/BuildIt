@@ -76,7 +76,7 @@ function init() {
                 break;
         }
     });
-} 
+}
     /* checks if object is selected, but does not work
     if (container != null) {
         container.addEventListener('click', function(event){

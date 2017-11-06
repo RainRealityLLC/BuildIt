@@ -6,6 +6,8 @@ html(lang='en')
   body(ontouchstart='')
     link(href='css/main.css', rel='stylesheet')
     link#theme(href='css/light.css', rel='stylesheet')
+    link(href='css/editor.css' rel='stylesheet')
+
     script(src='https://cdnjs.cloudflare.com/ajax/libs/three.js/88/three.js')
     script(src='js/libs/system.min.js')
     script(src='js/controls/EditorControls.js')
@@ -271,5 +273,21 @@ html(lang='en')
       }, false );
       */
 
-block body
-    img(src='/images/model-previews/audi.jpg')
+  // The Modal
+  #modal-gallery.modal
+    // Modal content
+    .modal-content
+      span.close ×
+      h2 3d Model Gallery
+
+      .modal-thumbnails.container-fluid
+        .row
+          .col-md-4
+            a(onclick="loader.load('/models/fbx/bacteria.fbx')")#thumbnail-1
+              img(src='http://placehold.it/140x140&text=1')
+          .col-md-4
+            a(onclick="loader.load('/models/fbx/bacteria.fbx')")#thumbnail-2
+              img(src='http://placehold.it/140x140&text=2')
+          .col-md-4
+            a(onclick="loader.load('/models/fbx/bacteria.fbx')")#thumbnail-3
+              img(src='http://placehold.it/140x140&text=3')

@@ -41,7 +41,23 @@ Menubar.Add = function ( editor ) {
 	option.setTextContent( 'Object From Gallery' );
 	option.onClick( function () {
 
-		console.log("WIP");
+		var modal = document.getElementById('modal-gallery')
+		modal.style.display= "block";
+
+		var span = document.getElementsByClassName("close")[0];
+		window.onclick = function(event){
+			if(event.target == modal){
+				modal.style.display = "none";
+			}
+		}
+		span.onclick = function(event){
+			if(event.target == modal){
+				modal.style.display = "none";
+			}
+
+
+		}
+		//editor.loader.loadFile( );
 	} );
 	options.add( option );
 

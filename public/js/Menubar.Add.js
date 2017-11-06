@@ -30,20 +30,22 @@ Menubar.Add = function ( editor ) {
 
 	} );
 
-	// Group
+	// Add from gallery
+
+	options.add( new UI.HorizontalRule() );
+
+	// Plane
 
 	var option = new UI.Row();
 	option.setClass( 'option' );
-	option.setTextContent( 'Group' );
+	option.setTextContent( 'Object From Gallery' );
 	option.onClick( function () {
 
-		var mesh = new THREE.Group();
-		mesh.name = 'Group ' + ( ++ meshCount );
-
-		editor.execute( new AddObjectCommand( mesh ) );
-
+		console.log("WIP");
 	} );
 	options.add( option );
+
+
 
 	//
 

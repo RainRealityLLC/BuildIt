@@ -33,9 +33,6 @@ Menubar.Add = function ( editor ) {
 	// Add from gallery
 
 	options.add( new UI.HorizontalRule() );
-
-	// Plane
-
 	var option = new UI.Row();
 	option.setClass( 'option' );
 	option.setTextContent( 'Object From Gallery' );
@@ -63,7 +60,22 @@ Menubar.Add = function ( editor ) {
 
 
 
-	//
+    // Add image
+
+	options.add( new UI.HorizontalRule() );
+	var option = new UI.Row();
+	option.setClass( 'option' );
+	option.setTextContent( 'Add Text' );
+	option.onClick( function () {
+    
+        console.log("WIP");
+    } );
+	options.add( option );
+
+
+
+    
+    
 
 	options.add( new UI.HorizontalRule() );
 
@@ -435,3 +447,7 @@ Menubar.Add = function ( editor ) {
 	return container;
 
 };
+
+
+
+

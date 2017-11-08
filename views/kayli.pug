@@ -1,4 +1,3 @@
-//sometimes the plane doesn't show up - need to fix 
 doctype html
 html(lang='en')
   head
@@ -12,18 +11,22 @@ html(lang='en')
       overflow: hidden;
       }
   body
-    script(src='http://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.min.js')
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/three.js/84/three.min.js')
     script.
       var camera, scene, renderer;
       var mesh;
       init();
+      animate();
       function init() {
-      camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
-      camera.position.z = 400;
+      camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 3000 );
+      camera.position.set( 1700, 750, 20 );
+      camera.lookAt( new THREE.Vector3( 0, 200, 0 ) );
       scene = new THREE.Scene();
-      var texture = new THREE.TextureLoader().load( 'models/kayli/table.jpg' );
-      var geometry = new THREE.BoxBufferGeometry( 600, 600, 100 );
-      var material = new THREE.MeshBasicMaterial( { map: texture } );
+      var light = new THREE.DirectionalLight( 0xffffff, 2 );
+      light.position.set( 1, 1, 1 );
+      scene.add( light );
+      var geometry = new THREE.BoxBufferGeometry( 2000, 100, 2000 );
+      var material = new THREE.MeshBasicMaterial( { color: 0xffffff} );
       mesh = new THREE.Mesh( geometry, material );
       scene.add( mesh );
       renderer = new THREE.WebGLRenderer();
@@ -37,4 +40,10 @@ html(lang='en')
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize( window.innerWidth, window.innerHeight );
+      }
+      function animate() {
+      requestAnimationFrame( animate );
+      //mesh.rotation.x += 0.005;
+      //mesh.rotation.y += 0.01;
+      renderer.render( scene, camera );
       }
